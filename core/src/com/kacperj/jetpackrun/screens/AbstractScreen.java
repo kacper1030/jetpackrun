@@ -12,7 +12,7 @@ public abstract class AbstractScreen implements Screen {
 	
 	public OrthographicCamera cam;
 	protected SpriteBatch batch;
-	private JetpackRun game;
+	JetpackRun game;
 	
 	public AbstractScreen(JetpackRun game){
 		this.game = game;
