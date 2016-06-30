@@ -12,11 +12,11 @@ import com.kacperj.jetpackrun.utilities.Terrain;
 public class GameplayScreen extends AbstractScreen {
 
 	private Music music;
-	private Terrain terrain;
+	private Terrain terrain, terrain1;
 	private JumpPlayer jumpPlayer;
 	private Texture playerTex;
 	private GameObject playerObj;
-	private Texture terrainTexture;
+	private Texture terrainTexture, terrainTexture1;
 
 	private float gravity = -12;
 
@@ -33,7 +33,7 @@ public class GameplayScreen extends AbstractScreen {
 
 	private void initPlayerSettings() {
 		jumpPlayer = new JumpPlayer();
-		playerTex = new Texture("badlogic.jpg");
+		playerTex = new Texture("playerTex.png");
 		playerObj = new GameObject(playerTex);
 
 		playerObj.x = 0;
@@ -55,6 +55,14 @@ public class GameplayScreen extends AbstractScreen {
 		terrain.y = 20;
 		terrain.width = terrain.getTexture().getWidth();
 		terrain.height = terrain.getTexture().getHeight();
+		
+		terrainTexture1 = new Texture("terrainTexture.png");
+		terrain1 = new Terrain(terrainTexture1);
+
+		terrain1.x = 500;
+		terrain1.y = 20;
+		terrain1.width = terrain1.getTexture().getWidth();
+		terrain1.height = terrain1.getTexture().getHeight();
 	}
 
 	@Override
@@ -69,9 +77,15 @@ public class GameplayScreen extends AbstractScreen {
 
 		batch.draw(playerObj.getTexture(), playerObj.x, playerObj.y);
 		batch.draw(terrain.getTexture(), terrain.x, terrain.y);
+		
+		drawAllTerrains();
 
 		batch.end();
 
+	}
+
+	private void drawAllTerrains() {
+		batch.draw(terrain.getTexture(), 500, 20);
 	}
 
 	private void cameraOnPlayer() {
@@ -102,20 +116,23 @@ public class GameplayScreen extends AbstractScreen {
 		if (playerObj.overlaps(terrain)) {
 			playerObj.y = 100;
 		}
+		if (playerObj.overlaps(terrain1)) {
+			playerObj.y = 100;
+		}
 	}
 
 	private void movePlayer() {
 		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
-			playerObj.y += 500 * Gdx.graphics.getDeltaTime();
+			playerObj.y += 400 * Gdx.graphics.getDeltaTime();
 		}
 		if (Gdx.input.isKeyPressed(Keys.S)) {
-			playerObj.y -= 100 * Gdx.graphics.getDeltaTime();
+			playerObj.y -= 200 * Gdx.graphics.getDeltaTime();
 		}
 		if (Gdx.input.isKeyPressed(Keys.A)) {
 			playerObj.x -= 100 * Gdx.graphics.getDeltaTime();
 		}
 		if (Gdx.input.isKeyPressed(Keys.D)) {
-			playerObj.x += 100 * Gdx.graphics.getDeltaTime();
+			playerObj.x += 300 * Gdx.graphics.getDeltaTime();
 		}
 	}
 
