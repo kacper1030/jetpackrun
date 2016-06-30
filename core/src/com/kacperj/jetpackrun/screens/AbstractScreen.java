@@ -6,10 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kacperj.jetpackrun.JetpackRun;
+import com.kacperj.jetpackrun.gameobject.GameObject;
 
 public abstract class AbstractScreen implements Screen {
 	
-	private OrthographicCamera cam;
+	public OrthographicCamera cam;
 	protected SpriteBatch batch;
 	private JetpackRun game;
 	
@@ -30,7 +31,7 @@ public abstract class AbstractScreen implements Screen {
 		cam.update();
 		batch.setProjectionMatrix(cam.combined);
 	}
-
+	
 	private void clearScreen() {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -56,5 +57,4 @@ public abstract class AbstractScreen implements Screen {
 		game.dispose();
 		
 	}
-	
 }

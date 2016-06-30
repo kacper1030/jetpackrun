@@ -28,7 +28,7 @@ public class GameplayScreen extends AbstractScreen {
 	private void init() {
 		initTerrain();
 		playMusic();
-		
+
 		jumpPlayer = new JumpPlayer();
 		playerTex = new Texture("badlogic.jpg");
 		playerObj = new GameObject(playerTex);
@@ -47,7 +47,7 @@ public class GameplayScreen extends AbstractScreen {
 	private void initTerrain() {
 		terrainTexture = new Texture("terrainTexture.png");
 		terrain = new Terrain(terrainTexture);
-		
+
 		terrain.x = 0;
 		terrain.y = 20;
 		terrain.width = terrain.getTexture().getWidth();
@@ -60,6 +60,8 @@ public class GameplayScreen extends AbstractScreen {
 
 		update();
 
+		cameraOnPlayer();
+
 		batch.begin();
 
 		batch.draw(playerObj.getTexture(), playerObj.x, playerObj.y);
@@ -67,6 +69,13 @@ public class GameplayScreen extends AbstractScreen {
 
 		batch.end();
 
+	}
+
+	private void cameraOnPlayer() {
+		cam.position.set(playerObj.x + 150, playerObj.y + 200, 0);
+//		cam.zoom = 
+		
+		//TODO SETUP CAMERA
 	}
 
 	private void update() {
@@ -81,11 +90,14 @@ public class GameplayScreen extends AbstractScreen {
 		}
 		colisionTerrain();
 		movePlayer();
-		
+
 	}
 
 	private void colisionTerrain() {
-		if(playerObj.y <= 100){
+		// if(playerObj.y <= 100){
+		// playerObj.y = 100;
+		// }
+		if (playerObj.overlaps(terrain)) {
 			playerObj.y = 100;
 		}
 	}
