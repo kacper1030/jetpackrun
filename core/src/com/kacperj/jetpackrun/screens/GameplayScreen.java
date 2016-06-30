@@ -2,6 +2,7 @@ package com.kacperj.jetpackrun.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.kacperj.jetpackrun.JetpackRun;
 import com.kacperj.jetpackrun.gameobject.GameObject;
@@ -10,6 +11,7 @@ import com.kacperj.jetpackrun.utilities.Terrain;
 
 public class GameplayScreen extends AbstractScreen {
 
+	private Music music;
 	private Terrain terrain;
 	private JumpPlayer jumpPlayer;
 	private Texture playerTex;
@@ -25,6 +27,7 @@ public class GameplayScreen extends AbstractScreen {
 
 	private void init() {
 		initTerrain();
+		playMusic();
 		
 		jumpPlayer = new JumpPlayer();
 		playerTex = new Texture("badlogic.jpg");
@@ -34,6 +37,11 @@ public class GameplayScreen extends AbstractScreen {
 		playerObj.y = 120;
 		playerObj.height = playerObj.getTexture().getHeight();
 		playerObj.width = playerObj.getTexture().getWidth();
+	}
+
+	private void playMusic() {
+		music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack1.mp3"));
+		music.play();
 	}
 
 	private void initTerrain() {
