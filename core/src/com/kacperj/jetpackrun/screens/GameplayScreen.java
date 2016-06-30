@@ -31,14 +31,19 @@ public class GameplayScreen extends AbstractScreen {
 		playerObj = new GameObject(playerTex);
 
 		playerObj.x = 0;
-		playerObj.y = 50;
+		playerObj.y = 120;
 		playerObj.height = playerObj.getTexture().getHeight();
 		playerObj.width = playerObj.getTexture().getWidth();
 	}
 
 	private void initTerrain() {
-		terrainTexture = new Texture("");
+		terrainTexture = new Texture("terrainTexture.png");
 		terrain = new Terrain(terrainTexture);
+		
+		terrain.x = 0;
+		terrain.y = 20;
+		terrain.width = terrain.getTexture().getWidth();
+		terrain.height = terrain.getTexture().getHeight();
 	}
 
 	@Override
@@ -50,6 +55,7 @@ public class GameplayScreen extends AbstractScreen {
 		batch.begin();
 
 		batch.draw(playerObj.getTexture(), playerObj.x, playerObj.y);
+		batch.draw(terrain.getTexture(), terrain.x, terrain.y);
 
 		batch.end();
 
@@ -58,20 +64,26 @@ public class GameplayScreen extends AbstractScreen {
 	private void update() {
 		playerObj.y += jumpPlayer.jumpVelocity * Gdx.graphics.getDeltaTime();
 
-		if (playerObj.y > 0) {
+		if (playerObj.y > 100) {
 			jumpPlayer.jumpVelocity += gravity;
 		} else {
 			playerObj.y = 0;
 			jumpPlayer.canJump = true;
 			jumpPlayer.jumpVelocity = 0;
 		}
-
+		colisionTerrain();
 		movePlayer();
+		
+	}
 
+	private void colisionTerrain() {
+		if(playerObj.y <= 100){
+			playerObj.y = 100;
+		}
 	}
 
 	private void movePlayer() {
-		if (Gdx.input.isKeyPressed(Keys.W)) {
+		if (Gdx.input.isKeyPressed(Keys.SPACE)) {
 			playerObj.y += 500 * Gdx.graphics.getDeltaTime();
 		}
 		if (Gdx.input.isKeyPressed(Keys.S)) {
