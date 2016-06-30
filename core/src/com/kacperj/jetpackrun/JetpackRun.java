@@ -1,17 +1,14 @@
 package com.kacperj.jetpackrun;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class JetpackRun extends Game {
 	
-	protected final static int HEIGHT = 700;
-	protected final static int WIDTH = 500;
-	protected final static String GAME_NAME = "JetpackRun!";
+	protected static final int HEIGHT = 700;
+	protected static final  int WIDTH = 500;
+	protected static final String GAME_NAME = "JetpackRun!";
 	
 	
 	public void create () {
