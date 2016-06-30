@@ -28,7 +28,10 @@ public class GameplayScreen extends AbstractScreen {
 	private void init() {
 		initTerrain();
 		playMusic();
+		initPlayerSettings();
+	}
 
+	private void initPlayerSettings() {
 		jumpPlayer = new JumpPlayer();
 		playerTex = new Texture("badlogic.jpg");
 		playerObj = new GameObject(playerTex);
@@ -73,12 +76,16 @@ public class GameplayScreen extends AbstractScreen {
 
 	private void cameraOnPlayer() {
 		cam.position.set(playerObj.x + 150, playerObj.y + 200, 0);
-//		cam.zoom = 
-		
-		//TODO SETUP CAMERA
 	}
 
 	private void update() {
+		setupWorld();
+		colisionTerrain();
+		movePlayer();
+
+	}
+
+	private void setupWorld() {
 		playerObj.y += jumpPlayer.jumpVelocity * Gdx.graphics.getDeltaTime();
 
 		if (playerObj.y > 100) {
@@ -88,15 +95,10 @@ public class GameplayScreen extends AbstractScreen {
 			jumpPlayer.canJump = true;
 			jumpPlayer.jumpVelocity = 0;
 		}
-		colisionTerrain();
-		movePlayer();
 
 	}
 
 	private void colisionTerrain() {
-		// if(playerObj.y <= 100){
-		// playerObj.y = 100;
-		// }
 		if (playerObj.overlaps(terrain)) {
 			playerObj.y = 100;
 		}
