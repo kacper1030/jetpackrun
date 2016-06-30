@@ -6,8 +6,8 @@ import com.kacperj.jetpackrun.gameobject.GameObject;
 
 public class GameplayScreen extends AbstractScreen{
 
-	private GameObject go;
-	private Texture tex;
+	private GameObject playerObj;
+	private Texture playerTex;
 	public GameplayScreen(JetpackRun game) {
 		super(game);
 		init();
@@ -15,23 +15,28 @@ public class GameplayScreen extends AbstractScreen{
 	
 	private void init() {
 
-		tex = new Texture("badlogic.jpg");
-		go = new GameObject(tex);
+		playerTex = new Texture("badlogic.jpg");
+		playerObj = new GameObject(playerTex);
 		
-		go.x = 0;
-		go.y = 0;
+		playerObj.x = 0;
+		playerObj.y = 0;
+		playerObj.height = playerObj.getTexture().getHeight();
+		playerObj.width = playerObj.getTexture().getWidth();
 	}
 	@Override
 	public void render(float delta) {
 		super.render(delta);
 		
+		update();
+		
 		batch.begin();
 		
-		batch.draw(go.getTexture(), go.x, go.y);
+		batch.draw(playerObj.getTexture(), playerObj.x, playerObj.y);
 		
 		batch.end();
 		
 	}
+	
 	
 
 }
