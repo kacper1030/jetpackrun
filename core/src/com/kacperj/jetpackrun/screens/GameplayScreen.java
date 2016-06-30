@@ -1,4 +1,4 @@
-package com.kacperj.jetpackrun.desktop.screens;
+package com.kacperj.jetpackrun.screens;
 
 import com.kacperj.jetpackrun.JetpackRun;
 

@@ -1,4 +1,4 @@
-package com.kacperj.jetpackrun.desktop.screens;
+package com.kacperj.jetpackrun.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
