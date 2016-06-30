@@ -6,12 +6,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.kacperj.jetpackrun.JetpackRun;
 import com.kacperj.jetpackrun.gameobject.GameObject;
 import com.kacperj.jetpackrun.gameobject.JumpPlayer;
+import com.kacperj.jetpackrun.utilities.Terrain;
 
 public class GameplayScreen extends AbstractScreen {
 
+	private Terrain terrain;
 	private JumpPlayer jumpPlayer;
-	private GameObject playerObj;
 	private Texture playerTex;
+	private GameObject playerObj;
+	private Texture terrainTexture;
 
 	private float gravity = -12;
 
@@ -21,15 +24,21 @@ public class GameplayScreen extends AbstractScreen {
 	}
 
 	private void init() {
-
+		initTerrain();
+		
 		jumpPlayer = new JumpPlayer();
 		playerTex = new Texture("badlogic.jpg");
 		playerObj = new GameObject(playerTex);
 
 		playerObj.x = 0;
-		playerObj.y = 0;
+		playerObj.y = 50;
 		playerObj.height = playerObj.getTexture().getHeight();
 		playerObj.width = playerObj.getTexture().getWidth();
+	}
+
+	private void initTerrain() {
+		terrainTexture = new Texture("");
+		terrain = new Terrain(terrainTexture);
 	}
 
 	@Override

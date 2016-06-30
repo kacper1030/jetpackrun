@@ -9,7 +9,7 @@ public class JumpPlayer extends Rectangle{
 	public float jumpVelocity;
 	
 	public void Jump(){
-		if(canJump && jumpVelocity >= 0){
+		if(canJump && jumpVelocity >= 300){
 			jumpVelocity += 500;
 			canJump = false;
 		}
