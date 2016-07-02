@@ -17,7 +17,10 @@ public class GameplayScreen extends AbstractScreen {
 	private Texture playerTex;
 	private GameObject playerObj;
 	private Texture terrainTexture, terrainTexture1;
-
+	
+	private GameObject obj250x80, obj50x200, obj50x50, obj80x80;
+	private Texture tex250x80, tex50x200, tex50x50, tex80x80;
+	
 	private float gravity = -12;
 
 	public GameplayScreen(JetpackRun game) {
@@ -26,9 +29,11 @@ public class GameplayScreen extends AbstractScreen {
 	}
 
 	private void init() {
+		initObjects();
+		initPlayerSettings();
 		initTerrain();
 		playMusic();
-		initPlayerSettings();
+		
 	}
 
 	private void initPlayerSettings() {
@@ -41,6 +46,22 @@ public class GameplayScreen extends AbstractScreen {
 		playerObj.height = playerObj.getTexture().getHeight();
 		playerObj.width = playerObj.getTexture().getWidth();
 	}
+	
+	private void initObjects() {
+		initTexturesOfObjects();
+		
+		obj250x80 = new GameObject(tex250x80); 
+		obj50x200 = new GameObject(tex50x200); 
+		obj50x50 = new GameObject(tex50x50); 
+		obj80x80 = new GameObject(tex80x80); 
+	}
+
+	private void initTexturesOfObjects() {
+		tex250x80 = new Texture("terrainAssets/250x80.png");
+		tex50x200 = new Texture("terrainAssets/50x200.png");
+		tex50x50 = new Texture("terrainAssets/50x50.png");
+		tex80x80 = new Texture("terrainAssets/80x80.png");
+	}
 
 	private void playMusic() {
 		music = Gdx.audio.newMusic(Gdx.files.internal("soundtrack1.mp3"));
@@ -48,6 +69,9 @@ public class GameplayScreen extends AbstractScreen {
 	}
 
 	private void initTerrain() {
+		
+		initObjectsOnMap();
+		
 		terrainTexture = new Texture("terrainTexture.png");
 		terrain = new Terrain(terrainTexture);
 
@@ -64,6 +88,43 @@ public class GameplayScreen extends AbstractScreen {
 		terrain1.width = terrain1.getTexture().getWidth();
 		terrain1.height = terrain1.getTexture().getHeight();
 	}
+	
+	private void initObjectsOnMap() {
+		
+		prop250x80();
+		prop50x200();
+		prop50x50();
+		prop80x80();
+
+	}
+
+	private void prop80x80() {
+		obj80x80.height = obj80x80.getTexture().getHeight();
+		obj80x80.width = obj80x80.getTexture().getHeight();
+		obj80x80.x = 700;
+		obj80x80.y = 250;
+	}
+
+	private void prop50x50() {
+		obj50x50.height = obj50x50.getTexture().getHeight();
+		obj50x50.width = obj50x50.getTexture().getHeight();
+		obj50x50.x = 800;
+		obj50x50.y = 300;
+	}
+
+	private void prop50x200() {
+		obj50x200.height = obj250x80.getTexture().getHeight();
+		obj50x200.width = obj250x80.getTexture().getHeight();
+		obj50x200.x = 500;
+		obj50x200.y = 200;
+	}
+
+	private void prop250x80() {
+		obj250x80.height = obj250x80.getTexture().getHeight();
+		obj250x80.width = obj250x80.getTexture().getHeight();
+		obj250x80.x = 300;
+		obj250x80.y = 100;
+	}
 
 	@Override
 	public void render(float delta) {
@@ -74,7 +135,12 @@ public class GameplayScreen extends AbstractScreen {
 		cameraOnPlayer();
 
 		batch.begin();
-
+		
+		
+		batch.draw(obj80x80.getTexture(), obj80x80.x, obj80x80.y);
+		batch.draw(obj50x50.getTexture(), obj50x50.x, obj50x50.y);
+		batch.draw(obj50x200.getTexture(), obj50x200.x, obj50x200.y);
+		batch.draw(obj250x80.getTexture(), obj250x80.x, obj250x80.y);
 		batch.draw(playerObj.getTexture(), playerObj.x, playerObj.y);
 		batch.draw(terrain.getTexture(), terrain.x, terrain.y);
 		
@@ -119,6 +185,15 @@ public class GameplayScreen extends AbstractScreen {
 		if (playerObj.overlaps(terrain1)) {
 			playerObj.y = 100;
 		}
+		
+		colisionProps();
+		
+	}
+
+	private void colisionProps() {
+		if (playerObj.overlaps(obj250x80)){
+			playerObj.y = 180;
+		}
 	}
 
 	private void movePlayer() {
@@ -129,7 +204,7 @@ public class GameplayScreen extends AbstractScreen {
 			playerObj.y -= 200 * Gdx.graphics.getDeltaTime();
 		}
 		if (Gdx.input.isKeyPressed(Keys.A)) {
-			playerObj.x -= 100 * Gdx.graphics.getDeltaTime();
+			playerObj.x -= 200 * Gdx.graphics.getDeltaTime();
 		}
 		if (Gdx.input.isKeyPressed(Keys.D)) {
 			playerObj.x += 300 * Gdx.graphics.getDeltaTime();
