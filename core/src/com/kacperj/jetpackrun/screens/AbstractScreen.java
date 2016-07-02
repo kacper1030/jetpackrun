@@ -5,6 +5,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.kacperj.jetpackrun.JetpackRun;
 
 public abstract class AbstractScreen implements Screen {
@@ -12,10 +14,12 @@ public abstract class AbstractScreen implements Screen {
 	public OrthographicCamera cam;
 	protected SpriteBatch batch;
 	JetpackRun game;
+	protected Stage stage;
 	
 	public AbstractScreen(JetpackRun game){
 		this.game = game;
 		createCamera();
+		stage = new Stage(new StretchViewport(JetpackRun.WIDTH, JetpackRun.HEIGHT, cam));
 		batch = new SpriteBatch();
 	}
 
