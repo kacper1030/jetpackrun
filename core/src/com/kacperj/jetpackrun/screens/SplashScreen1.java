@@ -17,7 +17,7 @@ public class SplashScreen1 extends AbstractScreen {
 
 			@Override
 			public void run() {
-				game.setScreen(new GameplayScreen(game));
+				game.setScreen(new MenuScreen(game));
 			}
 		}, 2);
 	}

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.kacperj.jetpackrun.JetpackRun;
-import com.kacperj.jetpackrun.gameobject.GameObject;
 
 public abstract class AbstractScreen implements Screen {
 	
